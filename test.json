@@ -1,0 +1,31 @@
+{
+    "Pokemon":[
+        {
+            "name":"ho_oh",
+            "fast_moves":19,
+            "charge_moves":5,
+            "hp":15,
+            "fastMove":"Fire Spin",
+            "chargeMove1":"Draco Claw",
+            "chargeMove2":"Fire Blast"
+        },
+        {
+            "name":"sylveon",
+            "fast_moves":2,
+            "charge_moves":5,
+            "hp":14,
+            "fastMove":"Bite",
+            "chargeMove1":"Sludge Bomb",
+            "chargeMove2":"Shadow Ball"
+        },
+        {
+            "name":"swampert",
+            "fast_moves":2,
+            "charge_moves":6,
+            "hp":12,
+            "fastMove":"Water Gun",
+            "chargeMove1":"Rock Blast",
+            "chargeMove2":"none"
+        }
+    ]
+}
