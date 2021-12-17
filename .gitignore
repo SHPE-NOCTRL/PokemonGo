@@ -1,0 +1,5 @@
+form_format.*
+*.exe
+*.obj
+test.py
+user_interface.*
