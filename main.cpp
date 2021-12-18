@@ -1,11 +1,11 @@
 /*
-    Program Name: PokemonGo! Team Generator
-
-    Purpose: The purpose of the program is to inform the reader of the best possible team they can have for Pokemon GO! PvP battles. The program is a work in a progess and intends to use machine learning algorithm to produce appropriate output.
-                Presently only the exact result of any team is generated but ideally the program will be developed to include a locally stored neural network that will generate values as weights to estimate team results. Once the neural network part is developed the real machine learning can begin.
-                Things to implement are a way to keep track of neural network training results, a way to track test results, a way to track gowth training, a way to track prediction variables, a definition for the training and testing functions, a way to get user input from the cmd rather than from opening the real file, a way to parallel compute the training data set, a comfy user-interface, preferable in C++, the optimization of the test.js file (idealliy converting its work into a C++ program), a complete JSON API in/for Pokemon_count.h
-    
-    Last Update: 12/17/2021 
+**    Program Name: PokemonGo! Team Generator
+**
+**    Purpose: The purpose of the program is to inform the reader of the best possible team they can have for Pokemon GO! PvP battles. The program is a work in a progess and intends to use machine learning algorithm to produce appropriate output.
+**                Presently only the exact result of any team is generated but ideally the program will be developed to include a locally stored neural network that will generate values as weights to estimate team results. Once the neural network part is developed the real machine learning can begin.
+**                Things to implement are a way to keep track of neural network training results, a way to track test results, a way to track gowth training, a way to track prediction variables, a definition for the training and testing functions, a way to get user input from the cmd rather than from opening the real file, a way to parallel compute the training data set, a comfy user-interface, preferable in C++, the optimization of the test.js file (idealliy converting its work into a C++ program), a complete JSON API in/for Pokemon_count.h
+**    
+**    Last Update: 12/18/2021 
 */
 
 #include <string>
