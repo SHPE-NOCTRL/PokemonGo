@@ -1,7 +1,7 @@
 /*
     Program Name: PokemonGo! Team Generator
 
-    Purpose: The purpose of the program is to inform the reader of the best possible team they can have for Pokemon GO! PvP battles. The program is a work in a progess and intends to use machine learning algorithms to produce appropriate output.
+    Purpose: The purpose of the program is to inform the reader of the best possible team they can have for Pokemon GO! PvP battles. The program is a work in a progess and intends to use machine learning algorithm to produce appropriate output.
                 Presently only the exact result of any team is generated but ideally the program will be developed to include a locally stored neural network that will generate values as weights to estimate team results. Once the neural network part is developed the real machine learning can begin.
                 Things to implement are a way to keep track of neural network training results, a way to track test results, a way to track gowth training, a way to track prediction variables, a definition for the training and testing functions, a way to get user input from the cmd rather than from opening the real file, a way to parallel compute the training data set, a comfy user-interface, preferable in C++, the optimization of the test.js file (idealliy converting its work into a C++ program), a complete JSON API in/for Pokemon_count.h
     
@@ -82,7 +82,7 @@ int main () {
 
     // the below if is the if of the program. If the if condition is true this means the number of pokemon a user has submitted is greater than three and the appropriate code is ran for what is considered a LARGE list.
     if(lengthofpokemonlist != 3){
-        // The below while() will generate our array of thread function arguments.
+        // The below while() will generate our array of thread function arguments printline.
         while(a + 2 < lengthofpokemonlist) {
             finder1 = Pokemon_count(a+1);
             finder2 = Pokemon_count(b+1);
@@ -135,27 +135,33 @@ int main () {
     }//end if ( LARGE list ).
     // The else below is the else that is ran when a list is 3 pokemon in length. If the length is less than three the program will break in here.
     else {
+        // The instruction below is done in both the if and the else. It sets our pokemon object to a valid pokemon.
         finder1 = Pokemon_count(a+1);
         finder2 = Pokemon_count(b+1);
         finder3 = Pokemon_count(c+1);
-
+        //end setting pokemon.
+        // Below instructions can be removed but I use them to gage the eth of the program in runtime.
         cout << "Ho-Oh fast move count from pokemon_count obj: " + getFastMoveCount(finder1.find()) << endl;
         
         cout << "Ho-Oh charge move count from pokemon_count obj: " << getChargeMoveCount(finder1.find()) << endl;
+        //end run-time time gage.
 
+        // Setting the move counts for each pokemon. This is done in only the else conditional. The thread function in the else conditional varies from the thread function of the if conditional in the argument passed to the thread function thru the printline variable. The point is the if conditional only passes the pokemon name arguments and the else conditional passes the complete address.
         fast_moves_1 = stoi(getFastMoveCount(finder1.find()));
         fast_moves_2 = stoi(getFastMoveCount(finder2.find()));
         fast_moves_3 = stoi(getFastMoveCount(finder3.find()));
         charge_moves_1 = stoi(getChargeMoveCount(finder1.find()));
         charge_moves_2 = stoi(getChargeMoveCount(finder2.find()));
         charge_moves_3 = stoi(getChargeMoveCount(finder3.find()));
-
+        //end setting the move counts.
+        // Recalculating the size of program variable utilizing the pokemon_count combination() function. The formula: Total#pokecombinations = product(pokeIfastmovescombination*pokeIchargemovescombination, for 0 < I < 4, or for each pokemon). This is the same as counting pokemon. For more details about why this works check out https://en.wikipedia.org/wiki/Counting 
         lengthofpokemonlist = finder1.combination(fast_moves_1,1) * finder1.combination(fast_moves_2,1) * finder1.combination(fast_moves_3,1) * finder1.combination(charge_moves_1,2) * finder1.combination(charge_moves_2,2) * finder1.combination(charge_moves_3,2);
         SIZEOFPROGRAM = lengthofpokemonlist;
         cout << "\nResized program size: " << SIZEOFPROGRAM << endl;
         delete [] printline;
         printline = new string[SIZEOFPROGRAM];
-    
+        //end sizing program size and printline.
+        // The below for() will generate our array of thread function arguments printline.
         for(int d = 0; d < fast_moves_1; d++){
             for(int e = 1; e < charge_moves_1; e++){
                 for(int f = e+1; f < charge_moves_1+1; f++){
@@ -167,7 +173,6 @@ int main () {
                                         for(int l = k+1; l < charge_moves_3+1; l++){
                                             printline[counter] = "node test.js premierclassic/10000-40/"+getName(finder1.find())+"-m-"+to_string(d)+"-"+to_string(e)+"-"+to_string(f)+"%2C"+getName(finder2.find())+"-m-"+to_string(g)+"-"+to_string(h)+"-"+to_string(i)+"%2C"+getName(finder3.find())+"-m-"+to_string(j)+"-"+to_string(k)+"-"+to_string(l) + " " + "-1" + " " + "-1";                                            
                                             counter++;
-                                            //cout << printline[counter-1] << endl;
                                         }
                                     }
                                 }
@@ -176,25 +181,35 @@ int main () {
                     }
                 }
             }
-        }
-        cout << "Right outside that loop" << endl;
+        }//end for() to generate thread function arguments.
+        // The counter integer will be used to keep track of the number of thread functions we have ran.
         counter = 0;
+        // The below for-loop runs the first 6 thread_func() instances.
         for(int z = 0; z < 6; z++){
+            // Assign thread[z] to a thread with thread function thread_func() to run, and arguments of a node.js instances and the bool to track its present activity.
             threads[z].swap(thread(&thread_func, printline[counter], (z+1), &threadtracker[z]));
             counter++;
-            cout << counter << endl;
-        }
+        }//end for(run first 6 threads).
+        // The below while-loop is the final stage of the program if the if conditional was met. From this main thread the threadtracker boolean variables are monitored and new instances of thread functions are ran on appropriate threads.
         while(counter < SIZEOFPROGRAM){
+            // For-loop to monitor thread tracking bools.
             for(int i = 0; i < 6; i++){
+                // Check if thread[i] is available.
                 if(threadtracker[i]){
+                    // Close thread process.
                     threads[i].join();
                     threads[i].~thread();
+                    //end close thread process.
+                    // Reset thread tracking variable.
                     threadtracker[i] = !threadtracker[i];
+                    // Assign thread[i] to a thread with valid thread function arguments.
                     threads[i].swap(thread(&thread_func, printline[counter], (i+1), &threadtracker[i]));
+                    // Increment thread_func counter variable.
                     counter++;
+                    // Done for no reason other than buble sort like flow. Will update for performance as needed.
                     i=6;
                 }
-            }
+            }//end thread monitoring pass.
         }
     }//end else ( SMALL list )
 
@@ -202,8 +217,9 @@ int main () {
     delete [] printline;
     
     return 0;
-}
+}//end main().
 
+// The getName function looks thru a pokemons data passed as the argument and finds its name and returns the name of the pokemon as a string variable return_value. This can be moved in to the pokemon_count page.
 string getName(string input) {
     int tracker = 0, startPoint = 0, endPoint = 0;
     string return_value = "";
@@ -222,8 +238,9 @@ string getName(string input) {
         startPoint++;
     }
     return return_value;
-}
+}//end getName.
 
+// The getFastMoveCount function looks thru a pokemons data passed as the argument and finds its fast move amount number and returns the fast move amount of the pokemon as a string variable return_value. This can be moved in to the pokemon_count page.
 string getFastMoveCount(string input) {
     int tracker = 0, startPoint = 0, endPoint = 0, item_number = 2, current_item = 1;
     string return_value = "";
@@ -248,8 +265,9 @@ string getFastMoveCount(string input) {
     }
 
     return return_value;
-}
+}//end getFastMoveCount.
 
+// The getChargeMoveCount function looks thru a pokemons data passed as the argument and finds its charge move amount number and returns the charge move amount of the pokemon as a string variable return_value. This can be moved in to the pokemon_count page.
 string getChargeMoveCount(string input) {
     int tracker = 0, startPoint = 0, endPoint = 0, item_number = 2, current_item = 1;
     string return_value = "";
@@ -274,4 +292,4 @@ string getChargeMoveCount(string input) {
     //}
 
     return return_value;
-}
+}//end getChargeMoveCount.
