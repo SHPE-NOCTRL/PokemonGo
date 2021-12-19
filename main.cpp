@@ -110,6 +110,8 @@ int main () {
             // Assign thread[i] to a thread with thread function thread_func() to run, and arguments of a node.js instances and the bool to track its present activity.
             threads[i].swap(thread(&thread_func, printline[counter], (i+1), &threadtracker[i]));
             counter++;
+            if(counter >= lengthofpokemonlist)
+                i = 6;
         }//end for(run first 6 threads).
         // The below while-loop is the final stage of the program if the if conditional was met. From this main thread the threadtracker boolean variables are monitored and new instances of thread functions are ran on appropriate threads.
         while(counter < SIZEOFPROGRAM){
@@ -212,7 +214,8 @@ int main () {
             }//end thread monitoring pass.
         }
     }//end else ( SMALL list )
-
+    for(int i = 0; i < 6; i++)
+        threads[i].join();
     delete [] threadtracker;
     delete [] printline;
     
