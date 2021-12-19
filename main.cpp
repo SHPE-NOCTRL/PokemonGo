@@ -77,11 +77,11 @@ int main () {
     // Here the next instruction will set the size of printline to the program size. This is done so when the if conditional is met the program will store the every node.js instance to complete into an array to they give as an argument to a thread with the thread function.
     string * printline = new string[SIZEOFPROGRAM];//is equal to statment : string blob
     cout << "Size of program: " << SIZEOFPROGRAM;
-    a = 0; b = a+1; c = b+1;
+    a = 0; b = 1; c = 2;
     int counter = 0;
 
     // the below if is the if of the program. If the if condition is true this means the number of pokemon a user has submitted is greater than three and the appropriate code is ran for what is considered a LARGE list.
-    if(lengthofpokemonlist != 3){
+    if(lengthofpokemonlist > 3){
         // The below while() will generate our array of thread function arguments printline.
         while(a + 2 < lengthofpokemonlist) {
             finder1 = Pokemon_count(a+1);

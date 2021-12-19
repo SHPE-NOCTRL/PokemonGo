@@ -26,6 +26,15 @@
             "fastMove":"Water Gun",
             "chargeMove1":"Rock Blast",
             "chargeMove2":"none"
+        },
+        {
+            "name":"gengar",
+            "fast_moves":4,
+            "charge_moves":7,
+            "hp":12,
+            "fastMove":"Water Gun",
+            "chargeMove1":"Rock Blast",
+            "chargeMove2":"none"
         }
     ]
 }
