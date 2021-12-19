@@ -101,8 +101,9 @@ async function setSetTimeout(apass) {
   // Pokemon moves starting points are set here. Fast moves are set to  start from 0 because that is the all inclusive starting point in the JS engine. Charge moves need to start at 1 because 0 is the index for none and there is no reason for us to start with none for charge moves.
   var p1fMove = 0, p1cMove1 = 1, p1cMove2 = 2, p2fMove = 0, p2cMove1 = 1, p2cMove2 = 2, p3fMove = 0, p3cMove1 = 1, p3cMove2 = 2;
   //need to increment charge move maxs b/c charge moves index begins at 1, before one we find a none
+
   // The if() checks if the program has been passed a LARGE list or a SMALL list. If the conditional is true then the instructions for a LARGE list are carried out.
-  if(process.argv[4] != -1) {
+  if(!(process.argv[4].includes("-"))) {
     // The below instruction sets the MAX value a pokemons move can have. First the fast move MAX is set for each pokemon then the charge move MAX is set for each pokemon.
     let p1fMoveMAX = moves[process.argv[2].toLowerCase()][0]["quickMove"], p2fMoveMAX = moves[process.argv[3].toLowerCase()][0]["quickMove"], p3fMoveMAX = moves[process.argv[4].toLowerCase()][0]["quickMove"], p1cMoveMAX = moves[process.argv[2].toLowerCase()][0]["chargeMove"] + 1, p2cMoveMAX = moves[process.argv[3].toLowerCase()][0]["chargeMove"] + 1, p3cMoveMAX = moves[process.argv[4].toLowerCase()][0]["chargeMove"] + 1;
     
@@ -110,7 +111,7 @@ async function setSetTimeout(apass) {
       while ( p1fMove != p1fMoveMAX ) {
         page = await browser.newPage();// Whoops. IDK if this line is important. It will be left here for now until an assessment is completed.
         // aMod variable is a modifier to the aTest endpoint. When it gets appended to aTest is directs the browser page to the endpoint with the correct battle league the correct CP range and a complete set of pokemon with moves.
-        aMod = "kanto/1500/"+process.argv[2].toLowerCase() + "-m-"+p1fMove+"-"+p1cMove1+"-"+p1cMove2+"%2C" + process.argv[3].toLowerCase()+ "-m-"+p2fMove+"-"+p2cMove1+"-"+p2cMove2+"%2C"  + process.argv[4].toLowerCase() + "-m-"+p3fMove+"-"+p3cMove1+"-"+p3cMove2 ;
+        aMod = "holiday/1500/"+process.argv[2].toLowerCase() + "-m-"+p1fMove+"-"+p1cMove1+"-"+p1cMove2+"%2C" + process.argv[3].toLowerCase()+ "-m-"+p2fMove+"-"+p2cMove1+"-"+p2cMove2+"%2C"  + process.argv[4].toLowerCase() + "-m-"+p3fMove+"-"+p3cMove1+"-"+p3cMove2 ;
         // Direct page to the correct address endpoint.
         await page.goto(aTest+aMod);
         await setSetTimeout(aMod);
