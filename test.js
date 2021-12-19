@@ -15,7 +15,7 @@ var page;
 // Create and define an instance object of the chrome options used for a puppeteer browser instance.
 const chromeOptions = {
   // When headless is true the chrome browser instance will be a headless instance meaning there will be no physical chrome browser for users to interact with. This should boost performance.
-  headless: true,
+  headless: false,
   defaultViewport: null,
 };//end definition of chrome options object.
 // Create an instance of our file system object.
@@ -103,12 +103,15 @@ async function setSetTimeout(apass) {
   //need to increment charge move maxs b/c charge moves index begins at 1, before one we find a none
   // The if() checks if the program has been passed a LARGE list or a SMALL list. If the conditional is true then the instructions for a LARGE list are carried out.
   if(process.argv[4] != -1) {
+    // The below instruction sets the MAX value a pokemons move can have. First the fast move MAX is set for each pokemon then the charge move MAX is set for each pokemon.
     let p1fMoveMAX = moves[process.argv[2].toLowerCase()][0]["quickMove"], p2fMoveMAX = moves[process.argv[3].toLowerCase()][0]["quickMove"], p3fMoveMAX = moves[process.argv[4].toLowerCase()][0]["quickMove"], p1cMoveMAX = moves[process.argv[2].toLowerCase()][0]["chargeMove"] + 1, p2cMoveMAX = moves[process.argv[3].toLowerCase()][0]["chargeMove"] + 1, p3cMoveMAX = moves[process.argv[4].toLowerCase()][0]["chargeMove"] + 1;
+    
     for (var i = 0; i < 1; i++) {
       while ( p1fMove != p1fMoveMAX ) {
-        page = await browser.newPage();
+        page = await browser.newPage();// Whoops. IDK if this line is important. It will be left here for now until an assessment is completed.
+        // aMod variable is a modifier to the aTest endpoint. When it gets appended to aTest is directs the browser page to the endpoint with the correct battle league the correct CP range and a complete set of pokemon with moves.
         aMod = "kanto/1500/"+process.argv[2].toLowerCase() + "-m-"+p1fMove+"-"+p1cMove1+"-"+p1cMove2+"%2C" + process.argv[3].toLowerCase()+ "-m-"+p2fMove+"-"+p2cMove1+"-"+p2cMove2+"%2C"  + process.argv[4].toLowerCase() + "-m-"+p3fMove+"-"+p3cMove1+"-"+p3cMove2 ;
-      
+        // Direct page to the correct address endpoint.
         await page.goto(aTest+aMod);
         await setSetTimeout(aMod);
         if ( p3cMove2 + 1 < p3cMoveMAX ) {
