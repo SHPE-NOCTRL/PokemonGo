@@ -3,9 +3,15 @@ const fse = require("fs-extra"); // v 5.0.0// Not used yet.
 const path = require("path");// Not used yet.
 // Create an instance of our puppeteer object.
 const puppeteer = require("puppeteer");
+/*
+**  source: https://raw.githubusercontent.com/PokeMiners/game_masters/master/latest/latest.json
+*/
 const mon = require("./text.json");// Not used yet.
 const poke = require("./test.json");// Not used yet.
 // Create an instance of our pokemon data sheet object.
+/*
+**  source: https://raw.githubusercontent.com/PokeMiners/game_masters/master/latest/latest.json
+*/
 const moves = require("./moves.json");
 
 // 
