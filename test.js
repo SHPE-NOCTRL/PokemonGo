@@ -81,8 +81,7 @@ async function setSetTimeout(apass) {
 (async function main() {
   // Initialize an instance of a puppeteer web browser.
   browser = await puppeteer.launch(chromeOptions);
-  // Initialize an instance of a new page in a puppeteer web browser.
-  page = await browser.newPage();
+
 /**   A JavaScript engine to simulate pokemon battles 
  *    Copyright 2021 PvPoke LLC
 *
@@ -114,8 +113,10 @@ async function setSetTimeout(apass) {
     let p1fMoveMAX = moves[process.argv[2].toLowerCase()][0]["quickMove"], p2fMoveMAX = moves[process.argv[3].toLowerCase()][0]["quickMove"], p3fMoveMAX = moves[process.argv[4].toLowerCase()][0]["quickMove"], p1cMoveMAX = moves[process.argv[2].toLowerCase()][0]["chargeMove"] + 1, p2cMoveMAX = moves[process.argv[3].toLowerCase()][0]["chargeMove"] + 1, p3cMoveMAX = moves[process.argv[4].toLowerCase()][0]["chargeMove"] + 1;
     
     for (var i = 0; i < 1; i++) {
+      
       while ( p1fMove != p1fMoveMAX ) {
-        page = await browser.newPage();// Whoops. IDK if this line is important. It will be left here for now until an assessment is completed.
+        // Initialize an instance of a new page in a puppeteer web browser.
+        page = await browser.newPage();
         // aMod variable is a modifier to the aTest endpoint. When it gets appended to aTest is directs the browser page to the endpoint with the correct battle league the correct CP range and a complete set of pokemon with moves.
         aMod = "holiday/1500/"+process.argv[2].toLowerCase() + "-m-"+p1fMove+"-"+p1cMove1+"-"+p1cMove2+"%2C" + process.argv[3].toLowerCase()+ "-m-"+p2fMove+"-"+p2cMove1+"-"+p2cMove2+"%2C"  + process.argv[4].toLowerCase() + "-m-"+p3fMove+"-"+p3cMove1+"-"+p3cMove2 ;
         // Direct page to the correct address endpoint.
