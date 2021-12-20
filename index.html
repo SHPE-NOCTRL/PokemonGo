@@ -1,0 +1,21 @@
+<!-- Note to remind users this will clear their local browser storage as is the current design -->
+<!DOCTYPE html>
+<html>
+    <body>
+        <input type="text">
+        <button onclick="myFunction()">Hello</button>
+        <script>
+            function myFunction(){
+                var myinput = document.getElementsByTagName("input")[0];
+                
+                window.localStorage.setItem(localStorage.length,JSON.stringify({name:myinput.value}));
+                console.log("Pie saved");
+            }
+            function setupPage(){
+                return 0;
+            }
+            if(window.addEventListener) window.addEventListener("load",setupPage, false);
+            else if(window.attachEvent) window.attachEvent("onload", setupPage);
+        </script>
+    </body>
+</html>
