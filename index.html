@@ -13,7 +13,7 @@
             function setListView(){
                 var listview = document.getElementsByTagName("ul")[0];
                 var newelement = document.createElement("li");
-                newelement.innerHTML = JSON.parse(localStorage.getItem(localStorage.length-1)).name
+                newelement.innerText = JSON.parse(localStorage.getItem("myPokemonInput"+(localStorage.length-1))).name; // Requires parenthesis for the length modulator else it will concatonate incorrectly.
                 listview.appendChild(newelement);
             }
             function myFunction(){
@@ -25,7 +25,7 @@
                 var index = "myPokemonInput"+counter;
                 var input = document.getElementsByTagName("input")[0].value;
                 var object = {name:input};
-                localStorage.setItem(counter, JSON.stringify(object));
+                localStorage.setItem(index, JSON.stringify(object));
                 setTimeout(setListView,500);
             }
             function setupPage(){
