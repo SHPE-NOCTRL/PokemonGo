@@ -31,6 +31,15 @@ class pokeNode {
     pokeNode getNext() {
         return *next;
     }
+    string toString() {
+        string output = entry;
+        pokeNode *temp = next;
+        while(temp != NULL){
+            output += temp->getEntry();
+            *temp = temp->getNext();
+        }
+        return output;
+    }
     private:
     string entry = "";
     pokeNode *next;
