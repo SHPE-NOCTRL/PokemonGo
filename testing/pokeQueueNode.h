@@ -29,9 +29,7 @@ class pokeQueueNode {
         }
 
         ~pokeQueueNode() {
-            value = 0;
-            if(next != NULL)
-                (*next).~pokeQueueNode();
-            next = NULL;
+            value = -1;
+            delete [] next;
         }
 };
